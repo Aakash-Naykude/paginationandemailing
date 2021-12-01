@@ -25,8 +25,8 @@ router.post("/", async (req, res) => {
       const count = await User.find({ user: { $eq: "admin" } }).count();
       for (var i = 0; i < count; i++) {
         var admin = await User.find({ user: { $eq: "admin" } }).skip(i).limit(1);
-        //console.log()
         admin = admin[0].email
+        console.log(admin)
         await sendmail(
           "paginationcorp@email.com",
           admin,
