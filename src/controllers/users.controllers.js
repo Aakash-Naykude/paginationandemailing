@@ -24,9 +24,11 @@ router.post("/", async (req, res) => {
     } else {
       const count = await User.find({ user: { $eq: "admin" } }).count();
       for (var i = 0; i < count; i++) {
-        var admin = await User.find({ user: { $eq: "admin" } }).skip(i).limit(1);
-        admin = admin[0].email
-        console.log(admin)
+        var admin = await User.find({ user: { $eq: "admin" } })
+          .skip(i)
+          .limit(1);
+        admin = admin[0].email;
+        console.log(admin);
         await sendmail(
           "paginationcorp@email.com",
           admin,
@@ -56,50 +58,30 @@ router.post("/", async (req, res) => {
         ]
       );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
       //or
-      
-      
 
+      //this will send mail to all admins at a time
+      // var newadmin = []
 
-
-
-
-        //this will send mail to all admins at a time
-        // var newadmin = []
-
-        // for (var i = 0; i < count; i++) {
-        //   var admin = await User.find({ user: { $eq: "admin" } }).skip(i).limit(1);
-        //   admin = admin[0].email
-        // newadmin.push(admin)
-        // }
-        // newadmin = newadmin.join(",")
-        // sendmail(
-        //   "paginationcorp@email.com",
-        //   newadmin,
-        //   `Welcome to ABC system ${req.body.first_name}, ${req.body.last_name}`,
-        //   ` Hi ${req.body.first_name}, Please confirm your email address`,
-        //   `<h1>Welcome to abc corp</h1>`,
-        //   [
-        //     {
-        //       filename: "name.txt",
-        //       path: "C:/MASAI SCHOOL/Masai Unit 4/week 3/paginationandemailing/src/name.txt",
-        //     },
-        //   ]
-        // );
-
+      // for (var i = 0; i < count; i++) {
+      //   var admin = await User.find({ user: { $eq: "admin" } }).skip(i).limit(1);
+      //   admin = admin[0].email
+      // newadmin.push(admin)
+      // }
+      // newadmin = newadmin.join(",")
+      // sendmail(
+      //   "paginationcorp@email.com",
+      //   newadmin,
+      //   `Welcome to ABC system ${req.body.first_name}, ${req.body.last_name}`,
+      //   ` Hi ${req.body.first_name}, Please confirm your email address`,
+      //   `<h1>Welcome to abc corp</h1>`,
+      //   [
+      //     {
+      //       filename: "name.txt",
+      //       path: "C:/MASAI SCHOOL/Masai Unit 4/week 3/paginationandemailing/src/name.txt",
+      //     },
+      //   ]
+      // );
     }
 
     return res.send({ newuser });
